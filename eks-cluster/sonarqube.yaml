@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonaqube-deployment
+  labels:
+    app: sonarqube
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: sonaqube
+  template:
+    metadata:
+      labels:
+        app: sonaqube
+    spec:
+      containers:
+        - name: sonaqube
+          image: sonaqube:latest 
+          ports:
+            - containerPort: 9000 # Port used by sonarqube
+          resources:
+              limits:
+                cpu: "1.5"   # 1.5 CPU cores
+                memory: "512Mi"  # 512 Megabytes
+              requests:
+                cpu: "1"   # 1 CPU core
+                memory: "256Mi"

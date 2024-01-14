@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-deployment
+  labels:
+    app: myapp
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins 
+          ports:
+            - containerPort: 8080 # Port used by Jenkins
+          resources:
+            limits:
+                cpu: "1.5"   # 1.5 CPU cores
+                memory: "512Mi"  # 512 Megabytes
+            requests:
+                cpu: "1"   # 2 CPU cores
+                memory: "256Mi"
+        
